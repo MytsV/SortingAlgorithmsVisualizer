@@ -1,0 +1,28 @@
+{
+  "mainColor": {
+    "r": 255,
+    "g": 255,
+    "b": 255
+  },
+  "swapColor": {
+    "r": 255,
+    "g": 0,
+    "b": 0
+  },
+  "searchColor": {
+    "r": 0,
+    "g": 0,
+    "b": 255
+  },
+  "backgroundColor": {
+    "r": 0,
+    "g": 0,
+    "b": 0
+  },
+  "mergeColor": {
+    "r": 0,
+    "g": 255,
+    "b": 0
+  },
+  "windowSize": 500
+}

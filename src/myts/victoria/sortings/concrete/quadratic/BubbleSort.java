@@ -1,0 +1,43 @@
+package myts.victoria.sortings.concrete.quadratic;
+
+import myts.victoria.callbacks.CallbackType;
+import myts.victoria.callbacks.RedrawArguments;
+import myts.victoria.callbacks.SortCallback;
+import myts.victoria.sortings.Sort;
+
+import java.util.Arrays;
+import java.util.List;
+
+public class BubbleSort<T extends Comparable<T>> extends Sort<T> {
+
+    public BubbleSort() {
+        super();
+    }
+
+    public BubbleSort(List<T> list, SortCallback callback) {
+        super(list, callback);
+    }
+
+    private List<Integer> getSwapList(int j) {
+        return Arrays.asList(j, j + 1);
+    }
+
+    private void runCallback(int j, CallbackType type) {
+        callback.run(new RedrawArguments(getSwapList(j), type));
+    }
+
+    public void sort() {
+        for (int i = 1; i < list.size(); i++) {
+            for (int j = 0; j < list.size() - i; j++) {
+                runCallback(j, CallbackType.SEARCHING);
+                if (getCompare().apply(list.get(j), list.get(j + 1))) {
+                    runCallback(j, CallbackType.SWAPPING);
+                    swap(j, j + 1);
+                    runCallback(j, CallbackType.SWAPPING);
+                }
+            }
+        }
+        callback.run(null);
+    }
+
+}
