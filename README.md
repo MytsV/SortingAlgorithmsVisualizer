@@ -1,0 +1,1 @@
+An easily extendable program to visualise sorting algorithms.
