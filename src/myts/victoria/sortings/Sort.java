@@ -1,7 +1,7 @@
 package myts.victoria.sortings;
 
 import myts.victoria.callbacks.SortCallback;
-import myts.victoria.config.ConfigManager;
+import myts.victoria.config.VisualizationConfig;
 
 import java.util.List;
 import java.util.function.BiFunction;
@@ -10,8 +10,10 @@ public abstract class Sort<T extends Comparable<T>> {
 
     protected List<T> list;
     protected SortCallback callback;
+    private VisualizationConfig<T> config;
 
-    public Sort() {
+    public Sort(VisualizationConfig<T> config) {
+        this.config = config;
     }
 
     public Sort(List<T> list, SortCallback callback) {
@@ -20,7 +22,7 @@ public abstract class Sort<T extends Comparable<T>> {
     }
 
     protected BiFunction<T, T, Boolean> getCompare() {
-        return ConfigManager.<T>getInstance().getConfig().getCompareMatch();
+        return config.getCompareMatch();
     }
 
     public void setList(List<T> list) {

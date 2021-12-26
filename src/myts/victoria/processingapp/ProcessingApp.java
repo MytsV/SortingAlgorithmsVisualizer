@@ -2,7 +2,6 @@ package myts.victoria.processingapp;
 
 import myts.victoria.callbacks.RedrawArguments;
 import myts.victoria.config.Color;
-import myts.victoria.config.ConfigManager;
 import myts.victoria.config.VisualizationConfig;
 import myts.victoria.views.ProcessingView;
 import processing.core.PApplet;
@@ -13,13 +12,13 @@ class ProcessingApp extends PApplet implements IProcessingApp {
     private final VisualizationConfig<Integer> config;
     private ProcessingView<?> view;
 
-    private ProcessingApp() {
-        this.config = ConfigManager.<Integer>getInstance().getConfig();
+    private ProcessingApp(VisualizationConfig<Integer> config) {
+        this.config = config;
     }
 
-    public static ProcessingApp getInstance() {
+    public static ProcessingApp getInstance(VisualizationConfig<Integer> config) {
         if (processingApp == null) {
-            processingApp = new ProcessingApp();
+            processingApp = new ProcessingApp(config);
         }
         return processingApp;
     }

@@ -2,7 +2,7 @@ package myts.victoria.sortings.concrete.logarithmic;
 
 import myts.victoria.callbacks.CallbackType;
 import myts.victoria.callbacks.RedrawArguments;
-import myts.victoria.callbacks.SortCallback;
+import myts.victoria.config.VisualizationConfig;
 import myts.victoria.sortings.Sort;
 
 import java.util.ArrayList;
@@ -13,11 +13,8 @@ import java.util.stream.IntStream;
 
 public class MergeSort<T extends Comparable<T>> extends Sort<T> {
 
-    public MergeSort() {
-    }
-
-    public MergeSort(List<T> list, SortCallback callback) {
-        super(list, callback);
+    public MergeSort(VisualizationConfig<T> config) {
+        super(config);
     }
 
     public void sort() throws Exception {
@@ -40,17 +37,30 @@ public class MergeSort<T extends Comparable<T>> extends Sort<T> {
     }
 
     private void merge(int left, int right) {
+        List<T> temp = initTemp(right - left);
+        setTemp(temp, left, right);
+
+        int idx = left;
+        for (T value : temp) {
+            callback.run(new RedrawArguments(List.of(idx), CallbackType.SWAPPING));
+            list.set(idx++, value);
+        }
+    }
+
+    private List<T> initTemp(int length) {
         List<T> temp = new ArrayList<>();
-        for (int i = 0; i < right - left + 1; i++) {
+        for (int i = 0; i < length + 1; i++) {
             temp.add(null);
         }
+        return temp;
+    }
 
+    private void setTemp(List<T> temp, int left, int right) {
         int middle = (left + right) / 2;
 
         int i = left;
         int j = middle + 1;
 
-        //TODO: change, cut, refactor
         for (int k = 0; (i <= middle) || (j <= right); k++) {
             callback.run(new RedrawArguments(Arrays.asList(i, j), CallbackType.SEARCHING));
             if (i > middle) {
@@ -63,13 +73,6 @@ public class MergeSort<T extends Comparable<T>> extends Sort<T> {
                 temp.set(k, list.get(j++));
             }
         }
-
-        int idx = left;
-        for (T value : temp) {
-            callback.run(new RedrawArguments(List.of(idx), CallbackType.SWAPPING));
-            list.set(idx++, value);
-        }
     }
-
 
 }

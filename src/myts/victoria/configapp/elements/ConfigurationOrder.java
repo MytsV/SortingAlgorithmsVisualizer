@@ -5,16 +5,18 @@ import myts.victoria.config.VisualizationConfig;
 
 import javax.swing.*;
 
-public class ConfigurationOrder extends JPanel {
+public class ConfigurationOrder<T extends Comparable<T>> extends JPanel {
 
     private final String ascendingName = "Ascending";
     private final String descendingName = "Descending";
+    private final CompareTypeManager<T> compareTypeManager;
 
     //TODO: fix warnings
-    public ConfigurationOrder(VisualizationConfig<? extends Comparable> config) {
+    public ConfigurationOrder(VisualizationConfig<T> config) {
         ButtonGroup group = new ButtonGroup();
+        compareTypeManager = new CompareTypeManager<>();
 
-        var compareTypes = CompareTypeManager.getInstance().getCompareTypes();
+        var compareTypes = compareTypeManager.getCompareTypes();
 
         JRadioButton ascending = new JRadioButton(ascendingName);
         JRadioButton descending = new JRadioButton(descendingName);
@@ -32,8 +34,8 @@ public class ConfigurationOrder extends JPanel {
         add(descending);
     }
 
-    private void setInitial(VisualizationConfig<? extends Comparable> config) {
-        config.setCompareMatch(CompareTypeManager.getInstance().getCompareTypes().get(ascendingName));
+    private void setInitial(VisualizationConfig<T> config) {
+        config.setCompareMatch(compareTypeManager.getCompareTypes().get(ascendingName));
     }
 
 

@@ -2,7 +2,7 @@ package myts.victoria.sortings.concrete.quadratic;
 
 import myts.victoria.callbacks.CallbackType;
 import myts.victoria.callbacks.RedrawArguments;
-import myts.victoria.callbacks.SortCallback;
+import myts.victoria.config.VisualizationConfig;
 import myts.victoria.sortings.Sort;
 
 import java.util.Arrays;
@@ -10,12 +10,8 @@ import java.util.List;
 
 public class BubbleSort<T extends Comparable<T>> extends Sort<T> {
 
-    public BubbleSort() {
-        super();
-    }
-
-    public BubbleSort(List<T> list, SortCallback callback) {
-        super(list, callback);
+    public BubbleSort(VisualizationConfig<T> config) {
+        super(config);
     }
 
     private List<Integer> getSwapList(int j) {

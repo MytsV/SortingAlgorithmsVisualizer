@@ -1,13 +1,14 @@
 package myts.victoria.views;
 
+import myts.victoria.config.VisualizationConfig;
 import processing.core.PApplet;
 
 public abstract class ListView<T extends Comparable<T>> extends ProcessingView<T> {
 
-    protected PApplet app;
+    protected final PApplet app;
 
-    public ListView(PApplet applet) {
-        super();
+    public ListView(PApplet applet, VisualizationConfig<T> config) {
+        super(config);
         this.app = applet;
     }
 

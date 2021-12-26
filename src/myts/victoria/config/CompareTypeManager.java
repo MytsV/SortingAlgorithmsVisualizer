@@ -4,26 +4,17 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.BiFunction;
 
-public class CompareTypeManager {
+public class CompareTypeManager<T extends Comparable<T>> {
 
-    private static CompareTypeManager instance;
+    private final Map<String, BiFunction<T, T, Boolean>> compareTypes;
 
-    private final Map<String, BiFunction<? extends Comparable, ? extends Comparable, Boolean>> compareTypes;
-
-    private CompareTypeManager() {
+    public CompareTypeManager() {
         compareTypes = new HashMap<>();
         compareTypes.put("Ascending", (a, b) -> a.compareTo(b) >= 0);
         compareTypes.put("Descending", (a, b) -> a.compareTo(b) <= 0);
     }
 
-    public static CompareTypeManager getInstance() {
-        if (instance == null) {
-            instance = new CompareTypeManager();
-        }
-        return instance;
-    }
-
-    public Map<String, BiFunction<? extends Comparable, ? extends Comparable, Boolean>> getCompareTypes() {
+    public Map<String, BiFunction<T, T, Boolean>> getCompareTypes() {
         return compareTypes;
     }
 

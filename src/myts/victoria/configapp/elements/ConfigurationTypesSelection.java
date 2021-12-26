@@ -9,25 +9,29 @@ import javax.swing.*;
 
 public class ConfigurationTypesSelection extends JComboBox<String> {
 
-    public ConfigurationTypesSelection(VisualizationConfig<?> config, SortManager sortManager) {
+    public ConfigurationTypesSelection(VisualizationConfig<Integer> config, SortManager<Integer> sortManager) {
         super(getSortArray(sortManager));
 
         setInitial(config);
 
-        addActionListener((event) -> config.setSort(getSort(sortManager.getSorts().get(getSelectedItem()))));
+        addActionListener((event) -> {
+            String item = getItemAt(getSelectedIndex());
+            Class<? extends Sort<Integer>> klass = sortManager.getSorts().get(item);
+            config.setSort(getSort(klass, config));
+        });
     }
 
-    private static String[] getSortArray(SortManager sortManager) {
+    private static String[] getSortArray(SortManager<Integer> sortManager) {
         return sortManager.getSorts().keySet().toArray(new String[0]);
     }
 
-    private void setInitial(VisualizationConfig<?> config) {
-        config.setSort(new MergeSort<>());
+    private void setInitial(VisualizationConfig<Integer> config) {
+        config.setSort(new MergeSort<>(config));
     }
 
-    private Sort getSort(Class<? extends Sort> sortClass) {
+    private Sort<Integer> getSort(Class<? extends Sort<Integer>> sortClass, VisualizationConfig<Integer> config) {
         try {
-            return sortClass.getDeclaredConstructor().newInstance();
+            return sortClass.getDeclaredConstructor().newInstance(config);
         } catch (Exception exception) {
             System.out.println(exception.getMessage());
             return null;

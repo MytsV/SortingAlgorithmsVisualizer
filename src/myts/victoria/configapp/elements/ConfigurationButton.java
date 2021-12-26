@@ -8,7 +8,7 @@ import java.awt.*;
 
 public class ConfigurationButton extends JButton {
 
-    public ConfigurationButton(VisualizationConfig<?> config, OnConfigurationCallback callback) {
+    public ConfigurationButton(VisualizationConfig<Integer> config, OnConfigurationCallback callback) {
         super("Submit");
         addActionListener((event) -> {
             if (config.getList() == null || config.getList().isEmpty()) {

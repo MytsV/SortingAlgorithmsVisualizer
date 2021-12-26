@@ -8,24 +8,23 @@ import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class SortManager {
+public class SortManager<T extends Comparable<T>> {
 
-    private final Map<String, Class<? extends Sort>> sorts = new LinkedHashMap<>();
+    private final Map<String, Class<? extends Sort<T>>> sorts = new LinkedHashMap<>();
 
     public SortManager() {
         initiateSorts();
     }
 
-    public Map<String, Class<? extends Sort>> getSorts() {
+    public Map<String, Class<? extends Sort<T>>> getSorts() {
         return sorts;
     }
 
     private void initiateSorts() {
-
         var list = Arrays.asList(MergeSort.class, BubbleSort.class, SelectionSort.class);
 
         for (var element : list) {
-            sorts.put(getName(element), element);
+            sorts.put(getName(element), (Class<? extends Sort<T>>) element);
         }
 
     }

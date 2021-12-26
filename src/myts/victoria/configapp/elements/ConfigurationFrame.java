@@ -6,41 +6,58 @@ import myts.victoria.sortings.SortManager;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
-public class ConfigurationFrame<T extends Comparable<T>> extends JFrame {
+public class ConfigurationFrame extends JFrame {
 
-    public ConfigurationFrame(VisualizationConfig<T> config, OnConfigurationCallback callback) {
+    public ConfigurationFrame(VisualizationConfig<Integer> config, OnConfigurationCallback callback) {
         setSize(config.getWindowSize(), config.getWindowSize());
 
         Container container = getContentPane();
-        container.setLayout(new FlowLayout());
+        container.setLayout(new GridLayout(10, 1));
 
-        container.add(new JLabel("Delay"));
-        container.add(new ConfigurationSlider(config));
-        container.add(new ConfigurationTypesSelection(config, new SortManager()));
+        JPanel panel = new JPanel();
+        panel.add(new ConfigurationSlider(config));
+        panel.add(new ConfigurationTypesSelection(config, new SortManager()));
+
+        container.add(panel);
 
         FieldModel model = new FieldModel();
 
-        ConfigurationList<T> list = new ConfigurationList<T>();
+        ConfigurationList<Integer> list = new ConfigurationList<>();
+        ConfigurationListField field = new ConfigurationListField(model);
 
-        container.add(list);
-        container.add(new ConfigurationListField(model));
-        container.add(new ConfigurationListButton(() -> {
+        Runnable onAddButtonClick = () -> {
             try {
                 list.add(Integer.parseInt(model.getText()));
                 config.setList(list.getList());
+                field.setText("");
             } catch (NumberFormatException exception) {
                 JOptionPane.showMessageDialog(this, "You should input a number");
             }
-        }));
+        };
+
+        field.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    onAddButtonClick.run();
+                }
+            }
+        });
+
+        container.add(list);
+        container.add(field);
+        container.add(new ConfigurationListButton(onAddButtonClick));
+
         container.add(new ConfigurationListRemoveButton(() -> {
             list.remove(list.getSelectedValue());
             config.setList(list.getList());
         }));
 
-        container.add(new ConfigurationOrder(config));
+        container.add(new ConfigurationOrder<>(config));
 
         container.add(new ConfigurationButton(config, callback));
     }
-
 }

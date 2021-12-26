@@ -5,6 +5,6 @@ import myts.victoria.config.VisualizationConfig;
 @FunctionalInterface
 public interface OnConfigurationCallback {
 
-    void run(VisualizationConfig<?> config);
+    void run(VisualizationConfig<Integer> config);
 
 }

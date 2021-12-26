@@ -11,13 +11,13 @@ public class Configurator {
     }
 
     public void start() {
-        VisualizationConfig<?> config = new VisualizationConfig<>();
+        VisualizationConfig<Integer> config = new VisualizationConfig<>();
         setStaticConfigs(config);
-        ConfigurationApp<?> configurationApp = new ConfigurationApp<>(config, callback);
+        ConfigurationApp configurationApp = new ConfigurationApp(config, callback);
         configurationApp.run();
     }
 
-    private void setStaticConfigs(VisualizationConfig<?> config) {
+    private void setStaticConfigs(VisualizationConfig<Integer> config) {
         FileConfiguration configuration = new FileConfiguration(config);
         configuration.load();
     }

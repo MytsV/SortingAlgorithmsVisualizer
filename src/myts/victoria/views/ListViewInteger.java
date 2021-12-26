@@ -1,6 +1,7 @@
 package myts.victoria.views;
 
 import myts.victoria.config.Color;
+import myts.victoria.config.VisualizationConfig;
 import processing.core.PApplet;
 
 import java.util.Collections;
@@ -8,8 +9,8 @@ import java.util.function.Consumer;
 
 public class ListViewInteger extends ListView<Integer> {
 
-    public ListViewInteger(PApplet applet) {
-        super(applet);
+    public ListViewInteger(PApplet applet, VisualizationConfig<Integer> config) {
+        super(applet, config);
     }
 
     private void setFill(Color color) {

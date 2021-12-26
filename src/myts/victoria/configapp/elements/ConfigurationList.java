@@ -19,8 +19,8 @@ public class ConfigurationList<T> extends JList<T> {
         return Collections.list(model.elements());
     }
 
-    public void add(Integer element) {
-        model.addElement((T) element);
+    public void add(T element) {
+        model.addElement(element);
     }
 
     public void remove(T element) {

@@ -1,6 +1,5 @@
 package myts.victoria;
 
-import myts.victoria.config.ConfigManager;
 import myts.victoria.config.VisualizationConfig;
 import myts.victoria.configapp.Configurator;
 import myts.victoria.processingapp.IProcessingApp;
@@ -9,14 +8,12 @@ import processing.core.PApplet;
 
 public class Main {
 
-    private static void runProcessingApp(VisualizationConfig<?> config) {
-        ConfigManager.<Integer>getInstance().setConfig((VisualizationConfig<Integer>) config);
-
+    private static void runProcessingApp(VisualizationConfig<Integer> config) {
         String[] processingArgs = {"Main"};
-        PApplet applet = ProcessingAppFactory.getApp();
+        PApplet applet = ProcessingAppFactory.getApp(config);
         PApplet.runSketch(processingArgs, applet);
         IProcessingApp processingApp = (IProcessingApp) applet;
-        App app = new App(processingApp);
+        App app = new App(processingApp, config);
         app.run();
     }
 

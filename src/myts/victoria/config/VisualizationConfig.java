@@ -105,7 +105,7 @@ public class VisualizationConfig<T extends Comparable<T>> {
         return compareMatch;
     }
 
-    public void setCompareMatch(BiFunction<? extends Comparable, ? extends Comparable, Boolean> compareMatch) {
-        this.compareMatch = (BiFunction<T, T, Boolean>) compareMatch;
+    public void setCompareMatch(BiFunction<T, T, Boolean> compareMatch) {
+        this.compareMatch = compareMatch;
     }
 }

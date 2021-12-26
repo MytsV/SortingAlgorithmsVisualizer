@@ -1,5 +1,6 @@
 package myts.victoria.configapp.elements;
 
+import myts.victoria.config.DelayConfig;
 import myts.victoria.config.VisualizationConfig;
 
 import javax.swing.*;
@@ -7,18 +8,17 @@ import javax.swing.*;
 public class ConfigurationSlider extends JSlider {
 
     public ConfigurationSlider(VisualizationConfig<?> config) {
-        //TODO: remove hard code
-        setMinimum(1);
-        setMaximum(10);
+        setMinimum(DelayConfig.MIN);
+        setMaximum(DelayConfig.MAX);
 
-        setValue(1);
+        setValue(DelayConfig.MIN);
         setPaintLabels(true);
-        setMajorTickSpacing(1);
+        setMajorTickSpacing(DelayConfig.TICK_SPACING);
         setPaintTicks(true);
 
         setInitial(config);
 
-        addChangeListener((event) -> config.setDelay(getValue() * 100));
+        addChangeListener((event) -> config.setDelay(getValue() * DelayConfig.MULTIPLIER));
     }
 
     private void setInitial(VisualizationConfig<?> config) {
