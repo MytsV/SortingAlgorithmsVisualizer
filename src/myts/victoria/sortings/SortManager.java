@@ -1,6 +1,8 @@
 package myts.victoria.sortings;
 
+import myts.victoria.sortings.concrete.logarithmic.HeapSort;
 import myts.victoria.sortings.concrete.logarithmic.MergeSort;
+import myts.victoria.sortings.concrete.logarithmic.QuickSort;
 import myts.victoria.sortings.concrete.quadratic.BubbleSort;
 import myts.victoria.sortings.concrete.quadratic.SelectionSort;
 
@@ -24,7 +26,7 @@ public class SortManager<T extends Comparable<T>> {
     }
 
     private void initiateSorts() {
-        var list = Arrays.asList(MergeSort.class, BubbleSort.class, SelectionSort.class);
+        var list = Arrays.asList(MergeSort.class, BubbleSort.class, SelectionSort.class, QuickSort.class, HeapSort.class);
 
         for (var element : list) {
             sorts.put(getName(element), (Class<? extends Sort<T>>) element);
