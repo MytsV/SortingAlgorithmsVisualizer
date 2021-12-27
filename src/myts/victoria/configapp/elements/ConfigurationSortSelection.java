@@ -7,9 +7,9 @@ import myts.victoria.sortings.concrete.logarithmic.MergeSort;
 
 import javax.swing.*;
 
-public class ConfigurationTypesSelection extends JComboBox<String> {
+public class ConfigurationSortSelection extends JComboBox<String> {
 
-    public ConfigurationTypesSelection(VisualizationConfig<Integer> config, SortManager<Integer> sortManager) {
+    public ConfigurationSortSelection(VisualizationConfig<Integer> config, SortManager<Integer> sortManager) {
         super(getSortArray(sortManager));
 
         setInitial(config);
@@ -31,7 +31,7 @@ public class ConfigurationTypesSelection extends JComboBox<String> {
 
     private Sort<Integer> getSort(Class<? extends Sort<Integer>> sortClass, VisualizationConfig<Integer> config) {
         try {
-            return sortClass.getDeclaredConstructor().newInstance(config);
+            return sortClass.getDeclaredConstructor(VisualizationConfig.class).newInstance(config);
         } catch (Exception exception) {
             System.out.println(exception.getMessage());
             return null;

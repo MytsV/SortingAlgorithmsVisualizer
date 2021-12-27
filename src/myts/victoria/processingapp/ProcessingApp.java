@@ -6,21 +6,13 @@ import myts.victoria.config.VisualizationConfig;
 import myts.victoria.views.ProcessingView;
 import processing.core.PApplet;
 
-class ProcessingApp extends PApplet implements IProcessingApp {
+public class ProcessingApp extends PApplet implements IProcessingApp {
 
-    private static ProcessingApp processingApp;
     private final VisualizationConfig<Integer> config;
     private ProcessingView<?> view;
 
-    private ProcessingApp(VisualizationConfig<Integer> config) {
+    public ProcessingApp(VisualizationConfig<Integer> config) {
         this.config = config;
-    }
-
-    public static ProcessingApp getInstance(VisualizationConfig<Integer> config) {
-        if (processingApp == null) {
-            processingApp = new ProcessingApp(config);
-        }
-        return processingApp;
     }
 
     private void setBackground(Color color) {
@@ -57,5 +49,9 @@ class ProcessingApp extends PApplet implements IProcessingApp {
     @Override
     public void settings() {
         size(config.getWindowSize(), config.getWindowSize());
+    }
+
+    public VisualizationConfig<Integer> getConfig() {
+        return config;
     }
 }

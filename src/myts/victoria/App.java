@@ -3,17 +3,16 @@ package myts.victoria;
 import myts.victoria.callbacks.CallbackType;
 import myts.victoria.callbacks.RedrawArguments;
 import myts.victoria.config.VisualizationConfig;
-import myts.victoria.processingapp.IProcessingApp;
-import myts.victoria.processingapp.ProcessingAppFactory;
+import myts.victoria.processingapp.ProcessingApp;
 import myts.victoria.sortings.Sort;
 import myts.victoria.views.ListViewInteger;
 
 public class App {
 
-    private final IProcessingApp processingApp;
+    private final ProcessingApp processingApp;
     private final VisualizationConfig<Integer> config;
 
-    public App(IProcessingApp processingApp, VisualizationConfig<Integer> config) {
+    public App(ProcessingApp processingApp, VisualizationConfig<Integer> config) {
         this.processingApp = processingApp;
         this.config = config;
     }
@@ -45,7 +44,7 @@ public class App {
         if (config.getList() == null || config.getSort() == null) {
             throw new IllegalArgumentException();
         }
-        ListViewInteger view = new ListViewInteger(ProcessingAppFactory.getApp(config), config);
+        ListViewInteger view = new ListViewInteger(processingApp);
         processingApp.setView(view);
         SortThread<Integer> sortThread = new SortThread<>(getSort());
         sortThread.start();

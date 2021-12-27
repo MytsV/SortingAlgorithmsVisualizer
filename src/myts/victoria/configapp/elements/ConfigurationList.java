@@ -32,7 +32,7 @@ public class ConfigurationList<T> extends JList<T> {
 class ConfigurationListField extends JTextField {
 
     public ConfigurationListField(FieldModel model) {
-        super(20);
+        super(17);
         getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
