@@ -110,6 +110,10 @@ public class ConfigurationFrame extends JFrame {
         panel.add(scrollPane);
         panel.add(field);
         panel.add(new ConfigurationListButton(onAddButtonClick));
+        panel.add(new ConfigurationListRemoveButton(() -> {
+            list.remove(list.getSelectedValue());
+            config.setList(list.getList());
+        }));
 
         return panel;
     }
