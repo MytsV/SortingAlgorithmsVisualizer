@@ -18,7 +18,7 @@ public class VisualizationConfig<T extends Comparable<T>> {
     private Color mergeColor;
     private int windowSize;
 
-    private BiFunction<T, T, Boolean> compareMatch;
+    private BiFunction<T, T, Boolean> compareOrder;
 
     public void copyFrom(VisualizationConfig<?> config) {
         backgroundColor = config.backgroundColor;
@@ -101,11 +101,11 @@ public class VisualizationConfig<T extends Comparable<T>> {
         this.windowSize = windowSize;
     }
 
-    public BiFunction<T, T, Boolean> getCompareMatch() {
-        return compareMatch;
+    public BiFunction<T, T, Boolean> getCompareOrder() {
+        return compareOrder;
     }
 
-    public void setCompareMatch(BiFunction<T, T, Boolean> compareMatch) {
-        this.compareMatch = compareMatch;
+    public void setCompareOrder(BiFunction<T, T, Boolean> compareOrder) {
+        this.compareOrder = compareOrder;
     }
 }

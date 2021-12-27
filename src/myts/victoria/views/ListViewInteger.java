@@ -12,8 +12,17 @@ public class ListViewInteger extends ListView<Integer> {
         super(applet, applet.getConfig());
     }
 
-    private void setFill(Color color) {
-        app.fill(color.getR(), color.getG(), color.getB());
+    public void display() {
+        iterateElements(idx -> {
+            //if the current element was acted upon
+            if (arguments != null && arguments.getChangeIndices().contains(idx)) {
+                switch (arguments.getCallbackType()) {
+                    case DIVIDING -> setFill(config.getMergeColor());
+                    case SEARCHING -> setFill(config.getSearchColor());
+                    case SWAPPING -> setFill(config.getSwapColor());
+                }
+            }
+        });
     }
 
     private void iterateElements(Consumer<Integer> callback) {
@@ -24,20 +33,13 @@ public class ListViewInteger extends ListView<Integer> {
 
             callback.accept(i);
 
+            //draws an element
             app.rect(i * getXSize(), app.height - ySize, getXSize(), ySize);
         }
     }
 
-    public void display() {
-        iterateElements(idx -> {
-            if (arguments != null && arguments.getChangeIndices().contains(idx)) {
-                switch (arguments.getCallbackType()) {
-                    case DIVIDING -> setFill(config.getMergeColor());
-                    case SEARCHING -> setFill(config.getSearchColor());
-                    case SWAPPING -> setFill(config.getSwapColor());
-                }
-            }
-        });
+    private void setFill(Color color) {
+        app.fill(color.getR(), color.getG(), color.getB());
     }
 
     @Override

@@ -14,14 +14,6 @@ public class BubbleSort<T extends Comparable<T>> extends Sort<T> {
         super(config);
     }
 
-    private List<Integer> getSwapList(int j) {
-        return Arrays.asList(j, j + 1);
-    }
-
-    private void runCallback(int j, CallbackType type) {
-        callback.run(new RedrawArguments(getSwapList(j), type));
-    }
-
     public void sort() {
         for (int i = 1; i < list.size(); i++) {
             for (int j = 0; j < list.size() - i; j++) {
@@ -34,6 +26,14 @@ public class BubbleSort<T extends Comparable<T>> extends Sort<T> {
             }
         }
         callback.run(null);
+    }
+
+    private void runCallback(int j, CallbackType type) {
+        callback.run(new RedrawArguments(getSwapList(j), type));
+    }
+
+    private List<Integer> getSwapList(int j) {
+        return Arrays.asList(j, j + 1);
     }
 
 }

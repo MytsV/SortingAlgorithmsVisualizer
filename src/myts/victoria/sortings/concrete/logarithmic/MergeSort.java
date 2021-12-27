@@ -23,10 +23,6 @@ public class MergeSort<T extends Comparable<T>> extends Sort<T> {
         callback.run(null);
     }
 
-    private List<Integer> getAllIndices(int left, int right) {
-        return IntStream.rangeClosed(left, right).boxed().collect(Collectors.toList());
-    }
-
     private void mergeSort(int left, int right) {
         if (right <= left) return;
         callback.run(new RedrawArguments(getAllIndices(left, right), CallbackType.DIVIDING));
@@ -34,6 +30,10 @@ public class MergeSort<T extends Comparable<T>> extends Sort<T> {
         mergeSort(left, middle);
         mergeSort(middle + 1, right);
         merge(left, right);
+    }
+
+    private List<Integer> getAllIndices(int left, int right) {
+        return IntStream.rangeClosed(left, right).boxed().collect(Collectors.toList());
     }
 
     private void merge(int left, int right) {

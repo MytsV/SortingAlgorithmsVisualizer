@@ -15,16 +15,16 @@ public class ProcessingApp extends PApplet implements IProcessingApp {
         this.config = config;
     }
 
-    private void setBackground(Color color) {
-        background(color.getR(), color.getG(), color.getB());
-    }
-
     @Override
     public void draw() {
         if (view != null) {
             setBackground(config.getBackgroundColor());
             view.display();
         }
+    }
+
+    private void setBackground(Color color) {
+        background(color.getR(), color.getG(), color.getB());
     }
 
     @Override

@@ -11,7 +11,6 @@ public class ConfigurationOrder<T extends Comparable<T>> extends JPanel {
     private final String descendingName = "Descending";
     private final CompareTypeManager<T> compareTypeManager;
 
-    //TODO: fix warnings
     public ConfigurationOrder(VisualizationConfig<T> config) {
         ButtonGroup group = new ButtonGroup();
         compareTypeManager = new CompareTypeManager<>();
@@ -24,8 +23,8 @@ public class ConfigurationOrder<T extends Comparable<T>> extends JPanel {
         ascending.setSelected(true);
         setInitial(config);
 
-        ascending.addActionListener((event) -> config.setCompareMatch(compareTypes.get(ascendingName)));
-        descending.addActionListener((event) -> config.setCompareMatch(compareTypes.get(descendingName)));
+        ascending.addActionListener((event) -> config.setCompareOrder(compareTypes.get(ascendingName)));
+        descending.addActionListener((event) -> config.setCompareOrder(compareTypes.get(descendingName)));
 
         group.add(ascending);
         group.add(descending);
@@ -35,7 +34,7 @@ public class ConfigurationOrder<T extends Comparable<T>> extends JPanel {
     }
 
     private void setInitial(VisualizationConfig<T> config) {
-        config.setCompareMatch(compareTypeManager.getCompareTypes().get(ascendingName));
+        config.setCompareOrder(compareTypeManager.getCompareTypes().get(ascendingName));
     }
 
 

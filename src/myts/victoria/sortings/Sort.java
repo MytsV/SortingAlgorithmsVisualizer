@@ -21,8 +21,9 @@ public abstract class Sort<T extends Comparable<T>> {
         this.callback = callback;
     }
 
+    //the function that returns a >= b if the order is ascending and a <= b if the order is ascending
     protected BiFunction<T, T, Boolean> getCompare() {
-        return config.getCompareMatch();
+        return config.getCompareOrder();
     }
 
     public void setList(List<T> list) {

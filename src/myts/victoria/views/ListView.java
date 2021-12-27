@@ -14,12 +14,14 @@ public abstract class ListView<T extends Comparable<T>> extends ProcessingView<T
 
     public abstract void display();
 
+    //height for a definite element
     protected abstract float getYElementSize(T element);
 
     protected float getXSize() {
         return (float) app.width / config.getList().size();
     }
 
+    //height for one element unit
     protected float getYSize() {
         return 20;
     }

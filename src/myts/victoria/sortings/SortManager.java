@@ -10,6 +10,7 @@ import java.util.Map;
 
 public class SortManager<T extends Comparable<T>> {
 
+    //regex for transforming class name
     final String titleCaseSplitRegex = "(?<=[a-z])(?=[A-Z])";
 
     private final Map<String, Class<? extends Sort<T>>> sorts = new LinkedHashMap<>();

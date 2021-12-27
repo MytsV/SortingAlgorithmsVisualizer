@@ -26,6 +26,7 @@ public class SelectionSort<T extends Comparable<T>> extends Sort<T> {
                 if (!getCompare().apply(list.get(j), list.get(minIndex))) {
                     minIndex = j;
                 }
+                //we run callbacks corresponding to the actions we do in sorting algorithm
                 callback.run(new RedrawArguments(Arrays.asList(i, j), CallbackType.SEARCHING));
             }
             if (minIndex != i) {
